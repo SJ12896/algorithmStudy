@@ -20,7 +20,7 @@ public class PhyExamSearch {
             return name + " " + height + " " + vision;
         }
 
-        public static final Comparator<PhyscData> HEIGHT_ORER
+        public static final Comparator<PhyscData> HEIGHT_ORDER
                 = new HeightOrderComparator();
 
         private static class HeightOrderComparator implements Comparator<PhyscData> {
@@ -44,7 +44,7 @@ public class PhyExamSearch {
         System.out.print("몇 cm인 사람을 찾고 있나요? : ");
         int height = sc.nextInt();
         int idx = Arrays.binarySearch(x, new PhyscData("", height, 0.0),
-                PhyscData.HEIGHT_ORER);
+                PhyscData.HEIGHT_ORDER);
         if (idx < 0)
             System.out.println("요소가 없습니다.");
         else {
