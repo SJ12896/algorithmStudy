@@ -1,23 +1,23 @@
 package chap04;
 
-public class IntQueue {
+public class IntAryQueue {
     private int max;
     private int front;
     private int rear;
     private int num;
     private int[] que;
 
-    public class EmptyIntQueueException extends RuntimeException {
-        public EmptyIntQueueException() {
+    public class EmptyIntAryQueueException extends RuntimeException {
+        public EmptyIntAryQueueException() {
         }
     }
 
-    public class OverflowIntQueueException extends RuntimeException {
-        public OverflowIntQueueException() {
+    public class OverflowIntAryQueueException extends RuntimeException {
+        public OverflowIntAryQueueException() {
         }
     }
 
-    public IntQueue(int capacity) {
+    public IntAryQueue(int capacity) {
         num = front = rear = 0;
         max = capacity;
         try {
@@ -27,9 +27,9 @@ public class IntQueue {
         }
     }
 
-    public int enque(int x) throws OverflowIntQueueException {
+    public int enque(int x) throws IntAryQueue.OverflowIntAryQueueException {
         if (num >= max)
-            throw new OverflowIntQueueException();
+            throw new IntAryQueue.OverflowIntAryQueueException();
         que[rear++] = x;
         num++;
         if (rear == max)
@@ -37,9 +37,9 @@ public class IntQueue {
         return x;
     }
 
-    public int deque() throws EmptyIntQueueException {
+    public int deque() throws IntAryQueue.EmptyIntAryQueueException {
         if (num <= 0)
-            throw new EmptyIntQueueException();
+            throw new IntAryQueue.EmptyIntAryQueueException();
         int x = que[front++];
         num--;
         if (front == max)
@@ -47,9 +47,9 @@ public class IntQueue {
         return x;
     }
 
-    public int peek() throws EmptyIntQueueException {
+    public int peek() throws IntAryQueue.EmptyIntAryQueueException {
         if (num <= 0)
-            throw new EmptyIntQueueException();
+            throw new IntAryQueue.EmptyIntAryQueueException();
         return que[front];
     }
 
@@ -88,29 +88,6 @@ public class IntQueue {
             for (int i = 0; i < num; i++)
                 System.out.println(que[(i + front) % max] + " ");
             System.out.println();
-        }
-    }
-
-    public void search(int x) {
-        if (num <= 0)
-            System.out.println("큐가 비어 있습니다.");
-        else {
-            int j = front;
-            while (true) {
-                if (j >= max) {
-                    j = 0;
-                }
-                if (que[j] == x) {
-                    System.out.println(Math.abs(j - front));
-                    break;
-                }
-
-                if (j == rear) {
-                    System.out.println("찾는 값이 없습니다.");
-                    break;
-                }
-
-            }
         }
     }
 }
