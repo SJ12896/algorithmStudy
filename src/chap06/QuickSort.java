@@ -30,6 +30,37 @@ public class QuickSort {
         if (pl < right) quickSort(a, pl, right);
     }
 
+    static void quickSort2(int[] a, int left, int right) {
+
+        IntStack lstack = new IntStack(right - left + 1);
+        IntStack rstack = new IntStack(right - left + 1);
+
+        lstack.push(left);
+        rstack.push(right);
+
+        while (lstack.isEmpty() != true) {
+            int pl = left = lstack.pop();
+            int pr = right = rstack.pop();
+            int x = a[(left + right) / 2];
+
+            do {
+                while (a[pl] < x) pl++;
+                while (a[pr] > x) pr--;
+                if (pl <= pr)
+                    swap(a, pl++, pr--);
+            } while (pl <= pr);
+
+            if (left < pr) {
+                lstack.push(left);
+                rstack.push(pr);
+            }
+            if (pl < right) {
+                lstack.push(pl);
+                rstack.push(pr);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("퀵 정렬");
