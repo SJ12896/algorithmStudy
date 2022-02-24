@@ -25,7 +25,7 @@ public class Fsort {
             do {
                 System.out.print("x[" + i + "] :");
                 x[i] = sc.nextInt();
-            } while (x[i] < 0)
+            } while (x[i] < 0);
         }
 
         int max = x[0];
