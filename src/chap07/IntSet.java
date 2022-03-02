@@ -98,4 +98,106 @@ public class IntSet {
         temp.append("}");
         return temp.toString();
     }
+
+    public boolean isEmpty() {
+        if (num == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFull() {
+        if (num == max) {
+            return true;
+        }
+        return false;
+    }
+
+    public void clear() {
+        set = new int[max];
+    }
+
+    public boolean add(IntSet s) {
+        boolean flag = false;
+        for (int i = 0; i < s.num; i++) {
+            add(s.set[i]);
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    public boolean retain(IntSet s) {
+        boolean flag = false;
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < s.num; j++) {
+                if (set[i] != s.set[j]) {
+                    remove(s.set[i]);
+                    flag = true;
+                }
+            }
+        }
+
+        return flag;
+    }
+
+
+    public boolean remove(IntSet s) {
+        boolean flag = false;
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < s.num; j++) {
+                if (set[i] == s.set[j]) {
+                    remove(s.set[i]);
+                    flag = true;
+                }
+            }
+        }
+
+        return flag;
+    }
+
+    public boolean isSubsetOf(IntSet s) {
+        boolean flag = true;
+
+        for (int i = 0; i < num; i++) {
+            if (!s.contains(set[i])) {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    public boolean isProperSubsetOf(IntSet s) {
+        if (s.num == num)
+            return false;
+
+        boolean flag = true;
+
+        for (int i = 0; i < num; i++) {
+            if (!s.contains(set[i])) {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    public void intersectionOf(IntSet s1, IntSet s2) {
+        for (int i = 0; i < s1.num; i++) {
+            for (int j = 0; j < s2.num; j++) {
+                if (s1.set[i] == s2.set[j]) {
+                    add(s1.set[i]);
+                }
+            }
+        }
+    }
+
+    public void differenceOf(IntSet s1, IntSet s2) {
+        for (int i = 0; i < s1.num; i++) {
+            for (int j = 0; j < s2.num; j++) {
+                if (s1.set[i] != s2.set[j]) {
+                    add(s1.set[i]);
+                }
+            }
+        }
+    }
 }
