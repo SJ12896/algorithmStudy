@@ -1,8 +1,7 @@
 package chap09;
-
 import java.util.Comparator;
 
-public class LinkedList<E> {
+public class LinkedListT<E> {
     class Node<E> {
         private E data;
         private Node<E> next;
@@ -15,9 +14,10 @@ public class LinkedList<E> {
 
     private Node<E> head;
     private Node<E> crnt;
+    private Node<E> tail;
 
-    public LinkedList() {
-        head = crnt = null;
+    public LinkedListT() {
+        head = crnt = tail = null;
     }
 
     public E search(E obj, Comparator<? super E> c) {
@@ -28,6 +28,7 @@ public class LinkedList<E> {
                 crnt = ptr;
                 return ptr.data;
             }
+            tail = ptr;
             ptr = ptr.next;
         }
         return null;
@@ -36,16 +37,23 @@ public class LinkedList<E> {
     public void addFirst(E obj) {
         Node<E> ptr = head;
         head = crnt = new Node<E>(obj, ptr);
+        tail = tail.next;
     }
 
     public void addLast(E obj) {
         if (head == null)
             addFirst(obj);
         else {
-            Node<E> ptr = head;
-            while (ptr.next != null)
-                ptr = ptr.next;
-            ptr.next = crnt = new Node<E>(obj, null);
+            if (tail == null) {
+                Node<E> ptr = head;
+                while (ptr.next != null)
+                    ptr = ptr.next;
+                ptr.next = crnt = new Node<E>(obj, null);
+                tail = crnt;
+            } else {
+                tail.next = crnt = new Node<E>(obj, null);
+            }
+
         }
     }
 
@@ -59,15 +67,19 @@ public class LinkedList<E> {
             if (head.next == null)
                 removeFirst();
             else {
-                Node<E> ptr = head;
-                Node<E> pre = head;
+                if (tail == null) {
+                    Node<E> ptr = head;
+                    Node<E> pre = head;
 
-                while (ptr.next != null) {
-                    pre = ptr;
-                    ptr = ptr.next;
+                    while (ptr.next != null) {
+                        pre = ptr;
+                        ptr = ptr.next;
+                    }
+                    pre.next = null;
+                    crnt = pre;
+                } else {
+                    tail = null;
                 }
-                pre.next = null;
-                crnt = pre;
             }
     }
 
@@ -75,6 +87,8 @@ public class LinkedList<E> {
         if (head != null) {
             if (p == head)
                 removeFirst();
+        } else if (p == tail) {
+            removeLast();
         } else {
             Node<E> ptr = head;
 

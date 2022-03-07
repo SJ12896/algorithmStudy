@@ -3,7 +3,7 @@ package chap09;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class LinkedListTester {
+public class AryLinkedListTester {
     static Scanner sc = new Scanner(System.in);
 
     static class Data {
@@ -104,7 +104,7 @@ public class LinkedListTester {
         Data ptr;
         Data temp = new Data();
 
-        LinkedList<Data> list = new LinkedList<Data>();
+        AryLinkedList<Data> list = new AryLinkedList<Data>(100);
 
         do {
             switch (menu = SelectMenu()) {
@@ -164,9 +164,6 @@ public class LinkedListTester {
 
                 case CLEAR:
                     list.clear();
-                    break;
-
-                case PURGE:
                     break;
             }
         } while (menu != Menu.TERMINATE);
