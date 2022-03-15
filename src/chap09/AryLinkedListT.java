@@ -2,8 +2,7 @@ package chap09;
 
 import java.util.Comparator;
 
-public class AryLinkedList<E> {
-
+public class AryLinkedListT<E> {
     class Node<E> {
         private E data;
         private int next;
@@ -20,11 +19,12 @@ public class AryLinkedList<E> {
     private int max;
     private int head;
     private int crnt;
+    private int tail;
     private int deleted;
     private static final int NULL = -1;
 
-    public AryLinkedList(int capacity) {
-        head = crnt = max = deleted = NULL;
+    public AryLinkedListT(int capacity) {
+        head = crnt = max = deleted = tail = NULL;
         try {
             n = new Node[capacity];
             for (int i = 0; i < capacity; i++)

@@ -3,7 +3,7 @@ package chap09;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class DblDblLinkedListTester {
+public class DblLinkedListTester {
     static Scanner sc = new Scanner(System.in);
 
     static class Data {
